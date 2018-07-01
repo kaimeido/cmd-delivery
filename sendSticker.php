@@ -7,109 +7,45 @@ require_once __DIR__ . '/vendor/autoload.php';
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
 // CurlHTTPClientとシークレットを使いLINEBotをインスタンス化
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
-// LINE Messaging APIがリクエストに付与した署名を取得
-$signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 
-// 署名が正当かチェック。正当であればリクエストをパースし配列へ
-// 不正であれば例外の内容を出力
-try {
-  $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
-} catch(\LINE\LINEBot\Exception\InvalidSignatureException $e) {
-  error_log('parseEventRequest failed. InvalidSignatureException => '.var_export($e, true));
-} catch(\LINE\LINEBot\Exception\UnknownEventTypeException $e) {
-  error_log('parseEventRequest failed. UnknownEventTypeException => '.var_export($e, true));
-} catch(\LINE\LINEBot\Exception\UnknownMessageTypeException $e) {
-  error_log('parseEventRequest failed. UnknownMessageTypeException => '.var_export($e, true));
-} catch(\LINE\LINEBot\Exception\InvalidEventRequestException $e) {
-  error_log('parseEventRequest failed. InvalidEventRequestException => '.var_export($e, true));
-}
 
-// 配列に格納された各イベントをループで処理
-foreach ($events as $event) {
-  //ユーザIDを表示
-  error_log($event->getUserID());
+  if (!empty($_GET)) {
+    //引数でメッセージが渡されていれば、取得して送信
+    $message = $_GET['msg'];
 
-  // MessageEventクラスのインスタンスでなければ処理をスキップ
-  if (!($event instanceof \LINE\LINEBot\Event\MessageEvent)) {
-    error_log('Non message event has come');
-    continue;
-  }
-  // TextMessageクラスのインスタンスでなければ処理をスキップ
-  if (!($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
-    error_log('Non text message has come');
-    continue;
-  }
-  // オウム返し
-  //$bot->replyText($event->getReplyToken(), $event->getText());
-
-  //ユーザID取得
-  $userId = $event->getUserID();
-
-  $findFlg = 0; //FlGoff
-
-  //ユーザIDをJSONファイルから読み込み。
-  $jsonUrl = "userinfo.json"; //JSONファイルの場所とファイル名を記述
-  if(file_exists($jsonUrl)){
-    $json = file_get_contents($jsonUrl);
-    //$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
-    $obj = json_decode($json,true);
-    foreach ($obj as $key => $val){
-      error_log($key);
-      if($key==$userId){
-        //すでに同じユーザIDが存在する場合、フラグON。
-        $findFlg = 1;
-        error_log("同じユーザIDが存在した");
-
-        //$bot->replyText($event->getReplyToken(), '既にユーザ登録されています。');
-      }
+    if ($message == 1) {
+      $stickerFile = '9000001.png';
+    } elseif ($message == 2) {
+      $stickerFile = '9000002.png';
+    } else {
+      $stickerFile = '9000001.png';
     }
-  }else {
-    //return;
-    error_log("データがありません");
+
+    //ユーザIDをJSONファイルから読み込み。
+    $jsonUrl = "userinfo.json"; //JSONファイルの場所とファイル名を記述
+    if(file_exists($jsonUrl)){
+      $json = file_get_contents($jsonUrl);
+      //$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
+      $obj = json_decode($json,true);
+      //ユーザ情報を１件づつチェック
+      foreach ($obj as $key => $val){
+        if($val["delivery"]==1){
+          error_log("メッセージ送信先：" . $key);
+
+          //$response = $bot->pushMessage($key, new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1, 1));
+          $response = $bot->pushMessage($key, new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder('https://' . $_SERVER['HTTP_HOST'] . '/img/' . $stickerFile, 'https://' . $_SERVER['HTTP_HOST'] . '/img/' . $stickerFile));
+          if (!$response->isSucceeded()) {
+            error_log('Failed!'. $response->getHTTPStatus . ' ' . $response->getRawBody());
+          }
+        }
+      }
+    }else {
+      //return;
+      error_log("データがありません");
+    }
   }
 
-  if($findFlg==0){
-    //同じユーザIDが存在しなかった場合、JSONファイルへ追加
-    error_log("新規ユーザ登録");
 
-    // ユーザーのプロフィールを取得
-    $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
-
-    //新規ユーザIDをJSONファイルへ書き込み
-    //$obj[$userId]['userName'] = $event->getText();
-    $obj[$userId]['userName'] = $profile['displayName'];
-    $obj[$userId]['delivery'] = 1;
-    //JSONファイルへ追加
-    $obj = json_encode($obj);
-    file_put_contents("userinfo.json" , $obj);
-
-    $bot->replyText($event->getReplyToken(), '新規ユーザ登録を行いました。');
-  } else {
-    //メッセージをテキストに書き込み
-    error_log("メッセージ書き込み");
-
-    //新規ユーザIDをJSONファイルへ書き込み
-    $Msgobj[$userId]['msg'] = $event->getText();
-    //JSONファイルへ追加
-    $Msgobj = json_encode($Msgobj);
-    file_put_contents("userMsg.json" , $Msgobj);
-
-    $bot->replyText($event->getReplyToken(), 'メッセージを送信しました。');
-
-    /*
-    // ユーザーのプロフィールを取得しメッセージを作成後返信
-    $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
-    $bot->replyMessage($event->getReplyToken(),
-      (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
-        ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('現在のプロフィールです。'))
-        ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('表示名：' . $profile['displayName']))
-        ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('画像URL：' . $profile['pictureUrl']))
-        ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('ステータスメッセージ：' . $profile['statusMessage']))
-    );
-    */
-
-  }
-}
 
 // テキストを返信。引数はLINEBot、返信先、テキスト
 function replyTextMessage($bot, $replyToken, $text) {
