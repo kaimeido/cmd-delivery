@@ -99,6 +99,7 @@
 					foreach ($obj as $key2 => $val){
 						if($val["delivery"]==1){
 							error_log("メッセージ送信：" . $key2);
+							error_log($_REQUEST['testMessage']);
 							// 送信フラグがONなら、メッセージをユーザーID宛にプッシュ
 							$response = $bot->pushMessage($key2, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($_REQUEST['testMessage']));
 							if (!$response->isSucceeded()) {
