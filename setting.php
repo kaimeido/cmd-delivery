@@ -106,12 +106,6 @@
 								error_log('Failed!'. $response->getHTTPStatus . ' ' . $response->getRawBody());
 							}
 
-
-							// 送信フラグがONなら、メッセージをユーザーID宛にプッシュ(phpから)
-							//error_log("メッセージ送信2：" . $key2);
-							//$fullPath = 'https://command-delivery.herokuapp.com/sendMessage.php/?msg=' . $_REQUEST['testMessage'];
-							//fopen($fullPath, 'r');
-
 						}
 					}
 				} elseif ($_REQUEST['command']=='Speech') {
