@@ -12,8 +12,9 @@ if (!empty($_GET)) {
   if ($arr === NULL) {
     return;
   }else{
-    //AIスピーカの発言内容をクリア
+    //AIスピーカの発言内容を更新
     $arr["SpeakerMsg"] = $message;
+    $arr["TimeStamp"] = date("Y/m/d H:i:s");
 
     //JSONファイルへ追加
     $arr = json_encode($arr);
