@@ -12,6 +12,7 @@ if ($arr === NULL) {
   foreach ($arr as $key => $val){
     error_log($key);
     //LINEメッセージ内容をクリアする
+    $arr[$key]["TimeStamp"] =　"";
     $arr[$key]['msg'] = "";
     //JSONファイルへ追加
     $arr = json_encode($arr);

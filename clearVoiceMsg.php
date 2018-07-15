@@ -9,6 +9,7 @@ if ($arr === NULL) {
   return;
 }else{
   //AIスピーカの発言内容をクリア
+  $arr["TimeStamp"] = "";
   $arr["SpeakerMsg"] = "";
   //JSONファイルへ追加
   $arr = json_encode($arr);
