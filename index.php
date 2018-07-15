@@ -89,6 +89,7 @@ foreach ($events as $event) {
     error_log("メッセージ書き込み");
 
     //新規ユーザIDをJSONファイルへ書き込み
+    date_default_timezone_set('Asia/Tokyo');
     $Msgobj[$userId]["TimeStamp"] = date("Y/m/d His");
     $Msgobj[$userId]['msg'] = $event->getText();
 

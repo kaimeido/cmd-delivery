@@ -13,8 +13,9 @@ if (!empty($_GET)) {
     return;
   }else{
     //AIスピーカの発言内容を更新
-    $arr["SpeakerMsg"] = $message;
+    date_default_timezone_set('Asia/Tokyo');
     $arr["TimeStamp"] = date("Y/m/d His");
+    $arr["SpeakerMsg"] = $message;
 
     //JSONファイルへ追加
     $arr = json_encode($arr);
