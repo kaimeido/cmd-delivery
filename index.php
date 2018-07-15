@@ -90,6 +90,8 @@ foreach ($events as $event) {
 
     //新規ユーザIDをJSONファイルへ書き込み
     $Msgobj[$userId]['msg'] = $event->getText();
+    $Msgobj[$userId]["TimeStamp"] = date("Y/m/d His");
+
     //JSONファイルへ追加
     $Msgobj = json_encode($Msgobj);
     file_put_contents("userMsg.json" , $Msgobj);
