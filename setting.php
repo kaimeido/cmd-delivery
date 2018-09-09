@@ -105,7 +105,7 @@
 					file_put_contents("userinfo.json" , $arr);
 
 				} elseif ($_REQUEST['command']=='sendmessage') {
-					error_log('メッセージ送信処理に入りました。');
+					error_log('呼び出し用メッセージ送信処理に入りました。');
 					//テストメッセージを送信
 					foreach ($obj as $key2 => $val){
 						if($val["delivery"]==1){
@@ -121,7 +121,7 @@
 					}
 				//>>>20180909 アラーム送信チェック有無判定
 				} elseif ($_REQUEST['command']=='Alarm_sendmessage') {
-					error_log('メッセージ送信処理に入りました。');
+					error_log('アラーム用メッセージ送信処理に入りました。');
 					//テストメッセージを送信
 					foreach ($obj as $key2 => $val){
 						if($val["Alarm_delivery"]==1){
