@@ -1,7 +1,7 @@
 <?php
 	//postなら処理を実行する
 	if($_SERVER['REQUEST_METHOD']=='POST'){
-		//header('Location:https://command-delivery.herokuapp.com/setting.php');
+		//header('Location:https://command-delivery.herokuapp.com/setting_Alarm.php');
 		error_log('POST:' . $_REQUEST['command']);
 	} else {
 		error_log('GET:' . $_REQUEST['command']);
@@ -125,7 +125,7 @@
 
 				foreach ($obj as $key => $val){
 					echo '<tr>';
-					echo '<form action="setting.php" method="post">';				//更新用のpost
+					echo '<form action="setting_Alarm.php" method="post">';				//更新用のpost
 					echo '<input type="hidden" name="command" value="update">';	//更新用の引数
 					echo '<input type="hidden" name="key" value="' , $key , '">';
 
@@ -139,7 +139,7 @@
 					}
 					echo '  <td><input type="submit" value="更新"></td>';				//更新用のボタン
 					echo '</form>';
-					echo '<form action="setting.php" method="post">';				//削除用のpost
+					echo '<form action="setting_Alarm.php" method="post">';				//削除用のpost
 					echo '<input type="hidden" name="command" value="delete">';	//削除用の引数
 					echo '<input type="hidden" name="key" value="' , $key , '">';
 					//echo '  <td> <a href="setting_update.php?key=', $key, '">削除</a></td>';
@@ -154,7 +154,7 @@
 	<?php
 			//テストメッセージ送信用フォーム
 			echo '<br>';
-			echo '<form action="setting.php" method="post">';				//送信用のpost
+			echo '<form action="setting_Alarm.php" method="post">';				//送信用のpost
 			echo '<input type="hidden" name="command" value="sendmessage">';	//送信用の引数
 			echo '<p><input type="text" name="testMessage" value="テストメッセージ"></p>';
 			echo '<p><input type="submit" value="メッセージ送信"></p>';
