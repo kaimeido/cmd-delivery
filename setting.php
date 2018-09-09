@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<h2>呼び出し用 設定ページ</h2>
 
 <table>
 	<thead>
