@@ -67,7 +67,7 @@
 								$arr[$key2]['delivery'] = 0;
 							}
 							//>>>20180909 アラーム送信チェック有無判定
-							if(isset($_REQUEST['Alarm_Delivery'])){
+							if(isset($_REQUEST['Alarm_delivery'])){
 								$arr[$key2]['Alarm_delivery'] = 1;
 							} else {
 								$arr[$key2]['Alarm_delivery'] = 0;
