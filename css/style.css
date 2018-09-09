@@ -26,10 +26,6 @@ tr:hover {
 	background: #ecfafc;
 }
 
-input ,select{
-    vertical-align:middle;
-}
-
 #login_form {
 	margin: 3em auto;
 	border: 3px solid #4267ab;
