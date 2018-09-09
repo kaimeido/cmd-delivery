@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<table>
+<table align="center">
 	<thead>
 		<tr>
 			<th>LINEユーザID</th>
