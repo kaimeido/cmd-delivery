@@ -156,7 +156,7 @@
 		    $json = file_get_contents($jsonUrl);
 		    $obj = json_decode($json,true);
 
-				foreach ($obj as $key => $val){
+				foreach ((array)$obj as $key => $val){
 					echo '<tr>';
 					echo '<form action="setting.php" method="post">';				//更新用のpost
 					echo '<input type="hidden" name="command" value="update">';	//更新用の引数
