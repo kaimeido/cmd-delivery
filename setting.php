@@ -200,7 +200,7 @@
 			echo '<p><input type="text" name="testMessage" value="テストメッセージ"></p>';
 			echo '<p><input type="submit" value="呼び出し用 メッセージ送信"></p>';
 			//>>>20180909 アラーム送信チェック有無判定
-			echo '<br>'
+			echo '<br>';
 			echo '<input type="hidden" name="command" value="Alarm_sendmessage">';	//送信用の引数
 			echo '<p><input type="text" name="testMessage" value="テストメッセージ"></p>';
 			echo '<p><input type="submit" value="アラーム用 メッセージ送信"></p>';
