@@ -26,14 +26,14 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h2>呼び出し用 設定ページ</h2>
 
 <table>
 	<thead>
 		<tr>
 			<th>LINEユーザID</th>
 			<th>氏名</th>
-			<th>送信</th>
+			<th>呼び出し送信</th>
+			<th>アラーム送信</th>
 			<th>更新</th>
 			<th>削除</th>
 		</tr>
@@ -60,12 +60,20 @@
 							error_log($_REQUEST['userName']);
 							//同じUser_IDの場合は、画面で入力されたUserNameを利用
 							$arr[$key2]['userName'] = htmlspecialchars($_REQUEST['userName']);
-							//送信チェック有無判定
+							//呼び出し送信チェック有無判定
 							if(isset($_REQUEST['Delivery'])){
 								$arr[$key2]['delivery'] = 1;
 							} else {
 								$arr[$key2]['delivery'] = 0;
 							}
+							//>>>20180909 アラーム送信チェック有無判定
+							if(isset($_REQUEST['Alarm_Delivery'])){
+								$arr[$key2]['Alarm_delivery'] = 1;
+							} else {
+								$arr[$key2]['Alarm_delivery'] = 0;
+							}
+							//<<<20180909 アラーム送信チェック有無判定
+
 						} else {
 							error_log('未更新対象です。');
 							error_log($key2);
@@ -73,6 +81,7 @@
 							//異なるUserIdの場合は、再作成。
 							$arr[$key2]['userName'] = $val["userName"];
 							$arr[$key2]['delivery'] = $val["delivery"];
+							$arr[$key2]['Alarm_delivery'] = $val["Alarm_delivery"];	//>>>20180909 アラーム送信チェック有無判定
 						}
 					}
 					//JSONファイルへ追加
@@ -88,6 +97,7 @@
 							//異なるUserIdの場合は、再作成。
 							$arr[$key2]['userName'] = $val["userName"];
 							$arr[$key2]['delivery'] = $val["delivery"];
+							$arr[$key2]['Alarm_delivery'] = $val["Alarm_delivery"];	//>>>20180909 アラーム送信チェック有無判定
 						}
 					}
 					//JSONファイルへ追加
@@ -109,6 +119,23 @@
 
 						}
 					}
+				//>>>20180909 アラーム送信チェック有無判定
+				} elseif ($_REQUEST['command']=='Alarm_sendmessage') {
+					error_log('メッセージ送信処理に入りました。');
+					//テストメッセージを送信
+					foreach ($obj as $key2 => $val){
+						if($val["Alarm_delivery"]==1){
+							error_log("メッセージ送信：" . $key2);
+							error_log($_REQUEST['testMessage']);
+							// 送信フラグがONなら、メッセージをユーザーID宛にプッシュ
+							$response = $bot->pushMessage($key2, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($_REQUEST['testMessage']));
+							if (!$response->isSucceeded()) {
+								error_log('Failed!'. $response->getHTTPStatus . ' ' . $response->getRawBody());
+							}
+
+						}
+					}
+				//<<<20180909 アラーム送信チェック有無判定
 				} elseif ($_REQUEST['command']=='Speech') {
 					error_log('スピーカ処理に入りました。');
 					//テストメッセージを送信
@@ -143,6 +170,14 @@
 					} else {
 						echo '  <td><input type="checkbox" name="Delivery"></td>';
 					}
+					//>>>20180909 アラーム送信チェック有無判定
+					if ($val['Alarm_delivery']==1){
+						//チェックON
+						echo '  <td><input type="checkbox" name="Alarm_delivery" checked="checked"></td>';
+					} else {
+						echo '  <td><input type="checkbox" name="Alarm_delivery"></td>';
+					}
+					//<<<20180909 アラーム送信チェック有無判定
 					echo '  <td><input type="submit" value="更新"></td>';				//更新用のボタン
 					echo '</form>';
 					echo '<form action="setting.php" method="post">';				//削除用のpost
@@ -163,7 +198,13 @@
 			echo '<form action="setting.php" method="post">';				//送信用のpost
 			echo '<input type="hidden" name="command" value="sendmessage">';	//送信用の引数
 			echo '<p><input type="text" name="testMessage" value="テストメッセージ"></p>';
-			echo '<p><input type="submit" value="メッセージ送信"></p>';
+			echo '<p><input type="submit" value="呼び出し用 メッセージ送信"></p>';
+			//>>>20180909 アラーム送信チェック有無判定
+			echo '<br>'
+			echo '<input type="hidden" name="command" value="Alarm_sendmessage">';	//送信用の引数
+			echo '<p><input type="text" name="testMessage" value="テストメッセージ"></p>';
+			echo '<p><input type="submit" value="アラーム用 メッセージ送信"></p>';
+			//<<<20180909 アラーム送信チェック有無判定
 			echo '</form>';
 			//テストメッセージ送信用フォーム
 			//echo '<br>';
