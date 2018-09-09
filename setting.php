@@ -166,16 +166,16 @@
 					echo '  <td><input type="text" name="userName" value="', $val['userName'], '"></td>';
 					if ($val['delivery']==1){
 						//チェックON
-						echo '  <td><input type="checkbox" name="Delivery" align="center" checked="checked"></td>';
+						echo '  <td><input type="checkbox" name="Delivery" checked="checked"></td>';
 					} else {
-						echo '  <td><input type="checkbox" name="Delivery" align="center"></td>';
+						echo '  <td><input type="checkbox" name="Delivery"></td>';
 					}
 					//>>>20180909 アラーム送信チェック有無判定
 					if ($val['Alarm_delivery']==1){
 						//チェックON
-						echo '  <td><input type="checkbox" name="Alarm_delivery" align="center" checked="checked"></td>';
+						echo '  <td><input type="checkbox" name="Alarm_delivery" checked="checked"></td>';
 					} else {
-						echo '  <td><input type="checkbox" name="Alarm_delivery" align="center"></td>';
+						echo '  <td><input type="checkbox" name="Alarm_delivery"></td>';
 					}
 					//<<<20180909 アラーム送信チェック有無判定
 					echo '  <td><input type="submit" value="更新"></td>';				//更新用のボタン
@@ -183,7 +183,6 @@
 					echo '<form action="setting.php" method="post">';				//削除用のpost
 					echo '<input type="hidden" name="command" value="delete">';	//削除用の引数
 					echo '<input type="hidden" name="key" value="' , $key , '">';
-					//echo '  <td> <a href="setting_update.php?key=', $key, '">削除</a></td>';
 					echo '  <td><input type="submit" value="削除"></td>';				//削除用のボタン
 					echo '</form>';
 					echo '</tr>';
