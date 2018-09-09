@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1>アラーム送信用 設定ページ</h1>
+<h2>アラーム送信用 設定ページ</h2>
 <table>
 	<thead>
 		<tr>
