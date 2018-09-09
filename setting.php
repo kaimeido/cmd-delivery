@@ -199,13 +199,15 @@
 			echo '<input type="hidden" name="command" value="sendmessage">';	//送信用の引数
 			echo '<p><input type="text" name="testMessage" value="テストメッセージ"></p>';
 			echo '<p><input type="submit" value="呼び出し用 メッセージ送信"></p>';
+			echo '</form>';
 			//>>>20180909 アラーム送信チェック有無判定
 			echo '<br>';
+			echo '<form action="setting.php" method="post">';
 			echo '<input type="hidden" name="command" value="Alarm_sendmessage">';	//送信用の引数
 			echo '<p><input type="text" name="testMessage" value="テストメッセージ"></p>';
 			echo '<p><input type="submit" value="アラーム用 メッセージ送信"></p>';
-			//<<<20180909 アラーム送信チェック有無判定
 			echo '</form>';
+			//<<<20180909 アラーム送信チェック有無判定
 			//テストメッセージ送信用フォーム
 			//echo '<br>';
 			//echo '<form action="setting.php" method="post">';				//送信用のpost
