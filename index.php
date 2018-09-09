@@ -79,6 +79,8 @@ foreach ($events as $event) {
     //$obj[$userId]['userName'] = $event->getText();
     $obj[$userId]['userName'] = $profile['displayName'];
     $obj[$userId]['delivery'] = 1;
+    $obj[$userId]['Alarm_delivery'] = 0;  //20180909アラーム用フラグ追加
+
     //JSONファイルへ追加
     $obj = json_encode($obj);
     file_put_contents("userinfo.json" , $obj);
