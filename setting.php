@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<table align="center">
+<table>
 	<thead>
 		<tr>
 			<th>LINEユーザID</th>
@@ -166,16 +166,16 @@
 					echo '  <td><input type="text" name="userName" value="', $val['userName'], '"></td>';
 					if ($val['delivery']==1){
 						//チェックON
-						echo '  <td><input type="checkbox" name="Delivery" checked="checked"></td>';
+						echo '  <td><input type="checkbox" name="Delivery" align="center" checked="checked"></td>';
 					} else {
-						echo '  <td><input type="checkbox" name="Delivery"></td>';
+						echo '  <td><input type="checkbox" name="Delivery" align="center"></td>';
 					}
 					//>>>20180909 アラーム送信チェック有無判定
 					if ($val['Alarm_delivery']==1){
 						//チェックON
-						echo '  <td><input type="checkbox" name="Alarm_delivery" checked="checked"></td>';
+						echo '  <td><input type="checkbox" name="Alarm_delivery" align="center" checked="checked"></td>';
 					} else {
-						echo '  <td><input type="checkbox" name="Alarm_delivery"></td>';
+						echo '  <td><input type="checkbox" name="Alarm_delivery" align="center"></td>';
 					}
 					//<<<20180909 アラーム送信チェック有無判定
 					echo '  <td><input type="submit" value="更新"></td>';				//更新用のボタン
