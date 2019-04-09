@@ -22,6 +22,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET
       $stickerFile = '9000001.png';
     }
     */
+    //POST内容をそのままファイル名とする
     $stickerFile = $message;
 
     //ユーザIDをJSONファイルから読み込み。
