@@ -24,7 +24,7 @@
 				<!-- Header -->
 					<header id="header" class="alt">
 						<span class="logo"><img src="images/logo.png" alt="" /></span>
-						<h1>LINE送信</h1>
+						<h2>LINE画像送信</h2>
 						<p>撮影した画像をLINEに送信します<br />
 					</header>
 
@@ -34,9 +34,9 @@
 						<!-- Get Started -->
 							<section id="cta" class="main special">
 								<header class="major">
-									<h2>ファイルを選択してください。</h2>
+									<h2>ファイルを選択して下さい</h2>
 									<p>「ファイルを選択」ボタンを押して<br />
-									アップロードするファイルを指定してください。</p>
+									アップロードするファイルを指定して下さい</p>
 								</header>
 								<footer class="major">
 									<ul class="actions special">
