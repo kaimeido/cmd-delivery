@@ -1,27 +1,4 @@
-<?php
-if (is_uploaded_file($_FILES['file']['tmp_name'])) {
-	if (!file_exists('upload')) {
-		mkdir('upload');
-	}
-	//ファイル名を変更する
-	//$file='upload/'.basename($_FILES['file']['name']);
-	$file='upload/001.jpg';
-	if (move_uploaded_file($_FILES['file']['tmp_name'], $file)) {
-		//echo $file, 'のアップロードに成功しました。';
-		echo '画像アップロードに成功しました。';
-		echo '<p><img src="', $file, '"></p>';
-	} else {
-		echo 'アップロードに失敗しました。';
-	}
-} else {
-	echo 'ファイルを選択してください。';
-}
 
-// ファイル名を取得して、ユニークなファイル名に変更
-//$file_name = $_FILES['upfile']['name'];
-//$uniq_file_name = date("YmdHis") . "_" . $file_name;
-
-?>
 
 <!DOCTYPE HTML>
 <!--
@@ -38,7 +15,6 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
-		<a href="updfile.php" class="button primary"> 戻る </a>
 		<!-- Wrapper -->
 			<div id="wrapper">
 				<!-- Header -->
@@ -47,6 +23,32 @@ if (is_uploaded_file($_FILES['file']['tmp_name'])) {
 
 				<!-- Main -->
 					<div id="main">
+						<section id="cta" class="main special">
+
+						<?php
+						if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+							if (!file_exists('upload')) {
+								mkdir('upload');
+							}
+							//ファイル名を変更する
+							//$file='upload/'.basename($_FILES['file']['name']);
+							$file='upload/001.jpg';
+							if (move_uploaded_file($_FILES['file']['tmp_name'], $file)) {
+								//echo $file, 'のアップロードに成功しました。';
+								echo '画像送信に成功しました。';
+								echo '<div id="sample"><p><img src="', $file, '"></p></div>';
+							} else {
+								echo '画像送信に失敗しました。';
+							}
+						} else {
+							echo 'ファイルを選択してください。';
+						}
+						?>
+
+						<ul class="actions special">
+						  <a href="updfile.php" class="button primary"> 戻る </a>
+					  </ul>
+						</section>
 					</div>
 
 				<!-- Footer -->

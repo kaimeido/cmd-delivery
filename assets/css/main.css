@@ -3773,10 +3773,12 @@ input, select, textarea {
 		label {
 		  background: #8cc9f0;
 		  padding: 10px 30px;
-		  border-radius: 10px;
+		  border-radius: 8px;
 		  display: inline-block;
 		  position: relative;
 		  transition: all 0.3s ease 0s;
+			width: 100%;
+			border: 0;
 		}
 		label:hover {
 		  background: #9acff2;
@@ -3784,7 +3786,7 @@ input, select, textarea {
 		  color: #fff;
 		}
 		label::after {
-		  content: "選択されていません";
+		  /*content: "選択されていません";*/
 			text-align: left;
 		  font-size: 14px;
 		  height: 20px;
@@ -3805,4 +3807,11 @@ input, select, textarea {
 		  margin: 30px 0 120px 0;
 		  display: block;
 		  font-size: 14px;
+		}
+
+		/* 画像表示 */
+		#sample img{
+		  max-width: 100%;
+		  height: auto;
+		  border-radius: 8px;
 		}

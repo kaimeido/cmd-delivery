@@ -25,7 +25,7 @@
 					<header id="header" class="alt">
 						<span class="logo"><img src="images/logo.png" alt="" /></span>
 						<h2>LINE画像送信</h2>
-						<p>撮影した画像をLINEに送信します<br />
+						<p>撮影した写真や画像をLINEに送信します。<br />
 					</header>
 
 				<!-- Main -->
@@ -34,9 +34,9 @@
 						<!-- Get Started -->
 							<section id="cta" class="main special">
 								<header class="major">
-									<h2>ファイルを選択して下さい</h2>
-									<p>「ファイルを選択」ボタンを押して<br />
-									アップロードするファイルを指定して下さい</p>
+									<h2>ファイルを選択して下さい。</h2>
+									<p>「ファイルを選択」ボタンを押して、<br />
+									送信するファイルを指定して下さい。</p>
 								</header>
 								<footer class="major">
 									<ul class="actions special">
@@ -44,7 +44,7 @@
 										<li><div id="file_input">
 						          <input type="file" id="file" name="file"><label for="file" id="file_label">ファイルを選択</label>
 						        </div></li>
-										<li><input type="submit" class="button" value="アップロード"></li>
+										<li><input type="submit" class="button" value="画像送信"></li>
 									</form>
 									</ul>
 								</footer>
