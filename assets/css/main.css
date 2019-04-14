@@ -3779,6 +3779,7 @@ input, select, textarea {
 		  transition: all 0.3s ease 0s;
 			width: 100%;
 			border: 0;
+			font-size: 16px;
 		}
 		label:hover {
 		  background: #9acff2;

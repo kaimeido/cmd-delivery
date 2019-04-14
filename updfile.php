@@ -41,11 +41,13 @@
 								<footer class="major">
 									<ul class="actions special">
 										<form action="updfile-result.php" method="post" enctype="multipart/form-data">
-										<li><div id="file_input">
-						          <input type="file" id="file" name="file"><label for="file" id="file_label">ファイルを選択</label>
-						        </div></li>
+										<div id="file_input">
+											<li><input type="file" id="file" name="file"><label for="file" id="file_label">ファイルを選択</label></li>
+						        </div>
 										<li><input type="submit" class="button" value="画像送信"></li>
-									</form>
+
+
+									  </form>
 									</ul>
 								</footer>
 							</section>
@@ -69,7 +71,9 @@
 	</body>
 
 	<script type='text/javascript' src='//code.jquery.com/jquery-2.2.4.min.js'></script><script>
-  $(function(){
+
+
+	$(function(){
     $("#file").on('change',function(){
       var file = $(this).prop('files')[0];
       if(!($(".filename").length)){
@@ -79,6 +83,59 @@
       $(".filename").html(file.name);
     });
   });
+
+	var resizeImage = function(base64image, callback) {
+    const MIN_SIZE = 1000;
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    var image = new Image();
+    image.crossOrigin = "Anonymous";
+    image.onload = function(event){
+      var dstWidth, dstHeight;
+      if (this.width > this.height) {
+        dstWidth = MIN_SIZE;
+        dstHeight = this.height * MIN_SIZE / this.width;
+      } else {
+        dstHeight = MIN_SIZE;
+        dstWidth = this.width * MIN_SIZE / this.height;
+      }
+      canvas.width = dstWidth;
+      canvas.height = dstHeight;
+      ctx.drawImage(this, 0, 0, this.width, this.height, 0, 0, dstWidth, dstHeight);
+      callback(canvas.toDataURL());
+    };
+    image.src = base64image;
+  };
+
+/*
+	$('input[name=photo]').change(function(e) {
+		var file = e.target.files[0];
+		if (file.type.match(/image.*/ /*)) {
+			var canvas = document.createElement("canvas"),
+					ctx = canvas.getContext('2d'),
+					image = new Image(),
+					size = 800;
+			canvas.width = canvas.height = 0;
+			image.src = URL.createObjectURL(file);
+			image.onload = function() {
+				var w = size, h = image.height * (size/image.width);
+				canvas.width = w;
+				canvas.height = h;
+				ctx.drawImage(image, 0, 0, w, h);
+
+				var img = document.createElement('img');
+				img.src = canvas.toDataURL(file.type);
+
+				var head = 'data:' + file.type + ';base64,';
+				var imgFileSize = Math.round((img.src.length - head.length)*3/4);
+				$('#contents').append("<div><span>" + "元画像サイズ" + (file.size/1024).toFixed(1) + "kb" + " => " + "変換後サイズ" + (imgFileSize/1024).toFixed(1) + "kb" + "</span></div>")
+
+				$("#contents").append(img);
+			}
+		}
+	});
+*/
+
   </script>
 
 </html>
