@@ -1,6 +1,5 @@
 {
     "require": {
-        "linecorp/line-bot-sdk": "^3.0",
-        "ext-gd": "*"
+        "linecorp/line-bot-sdk": "^3.0"
     }
 }
