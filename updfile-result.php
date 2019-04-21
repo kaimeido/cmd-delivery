@@ -18,30 +18,38 @@
 		<!-- Wrapper -->
 			<div id="wrapper">
 				<!-- Header -->
+				<!--
 					<header id="header" class="alt">
 					</header>
-
+				-->
+				<br>
 				<!-- Main -->
 					<div id="main">
 						<section id="cta" class="main special">
 
 						<?php
-						if (is_uploaded_file($_FILES['file']['tmp_name'])) {
-							if (!file_exists('upload')) {
-								mkdir('upload');
-							}
+						if (!empty($_FILES['file']['tmp_name'])) {
+							if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+								if (!file_exists('upload')) {
+									mkdir('upload');
+								}
 
-							$file='upload/001.jpg';
- 							if (move_uploaded_file($_FILES['file']['tmp_name'], $file)) {
- 								//echo $file, 'のアップロードに成功しました。';
- 								echo '画像送信に成功しました。';
- 								echo '<div id="sample"><p><img src="', $file, '"></p></div>';
- 							} else {
- 								echo '画像送信に失敗しました。';
- 							}
+								$file='upload/001.jpg';
+	 							if (move_uploaded_file($_FILES['file']['tmp_name'], $file)) {
+	 								//echo $file, 'のアップロードに成功しました。';
+	 								echo '画像送信に成功しました。';
+	 								echo '<div id="sample"><p><img src="', $file, '"></p></div>';
+	 							} else {
+	 								echo '画像送信に失敗しました。';
+	 							}
+							}
 						}
 						?>
 
+						<header class="major">
+							<h2>ファイルを送信しました。</h2>
+							<p>The file posted successfully.</p>
+						</header>
 						<div id="sample"><p><img src="upload/001.jpg"></p></div>
 
 						<ul class="actions special">

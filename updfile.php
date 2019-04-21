@@ -46,22 +46,10 @@
 						        </div>
 										<!-- <li><input type="submit" class="button" value="画像送信1"></li> -->
 									  </form>
-
-										<!-- ファイル選択ボタン -->
-										<!--
-										<div style="width: 300px">
-											<form action="updfile-result.php" enctype="multipart/form-data" method="post">
-												<input type="file" name="userfile" accept="image/*">
-											</form>
-										</div>
-										-->
 										<!-- サムネイル表示領域 -->
 										<li><canvas id="canvas" width="0" height="0"></canvas></li>
 										<!-- アップロード開始ボタン -->
-										<!-- <li><button class="btn btn-primary" id="upload">画像送信2</button></li> -->
-										<li><button class="button" id="upload">画像送信2</button></li>
-
-
+										<li><button class="button" id="upload"><font size="3">画像送信</font></button></li>
 									</ul>
 								</footer>
 							</section>
@@ -90,8 +78,8 @@
 	$(function() {
 	  var file = null; // 選択されるファイル
 	  var blob = null; // 画像(BLOBデータ)
-	  const THUMBNAIL_WIDTH = 300; // 画像リサイズ後の横の長さの最大値
-	  const THUMBNAIL_HEIGHT = 300; // 画像リサイズ後の縦の長さの最大値
+	  const THUMBNAIL_WIDTH = 600; // 画像リサイズ後の横の長さの最大値
+	  const THUMBNAIL_HEIGHT = 600; // 画像リサイズ後の縦の長さの最大値
 
 	  // ファイルが選択されたら
 	  $('input[type=file]').change(function() {
@@ -181,7 +169,11 @@
 	    .fail(function( jqXHR, textStatus, errorThrown ) {
 	      // 送信失敗
 	    });
-			alert('送信しました');
+
+			location.href = "sendPicture.php?msg=001.jpg";
+
+
+			location.href = "updfile-result.php";
 
 	  });
 
