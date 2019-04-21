@@ -37,7 +37,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET
           error_log("メッセージ送信先：" . $key);
 
           //$response = $bot->pushMessage($key, new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1, 1));
-          $response = $bot->pushMessage($key, new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder('https://' . $_SERVER['HTTP_HOST'] . '/img/' . $stickerFile, 'https://' . $_SERVER['HTTP_HOST'] . '/img/' . $stickerFile));
+          $response = $bot->pushMessage($key, new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder('https://' . $_SERVER['HTTP_HOST'] . '/upload/' . $stickerFile, 'https://' . $_SERVER['HTTP_HOST'] . '/upload/' . $stickerFile));
           if (!$response->isSucceeded()) {
             error_log('Failed!'. $response->getHTTPStatus . ' ' . $response->getRawBody());
           }
