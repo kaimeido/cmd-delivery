@@ -44,7 +44,6 @@
 										<div id="file_input">
 											<li><input type="file" id="file" name="file"><label for="file" id="file_label">ファイルを選択</label></li>
 						        </div>
-										<!-- <li><input type="submit" class="button" value="画像送信1"></li> -->
 									  </form>
 										<!-- サムネイル表示領域 -->
 										<li><canvas id="canvas" width="0" height="0"></canvas></li>
@@ -165,15 +164,15 @@
 	    })
 	    .done(function( data, textStatus, jqXHR ) {
 	      // 送信成功
+				console.log("TEST");
 	    })
 	    .fail(function( jqXHR, textStatus, errorThrown ) {
 	      // 送信失敗
+				console.log("hello world!");
+				//ページ遷移
+				location.href = "updfile-result.php";
 	    });
 
-			location.href = "sendPicture.php?msg=001.jpg";
-
-
-			location.href = "updfile-result.php";
 
 	  });
 
