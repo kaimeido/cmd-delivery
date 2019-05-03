@@ -55,6 +55,10 @@
 						<ul class="actions special">
 						  <a href="updfile.php" class="button primary"> 戻る </a>
 					  </ul>
+
+						<form action="sendPicture.php?msg=001.jpg" method="post">
+						<input type="submit" class="button fit" value="LINE画像送信">
+						</form>
 						</section>
 					</div>
 
