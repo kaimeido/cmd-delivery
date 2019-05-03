@@ -99,8 +99,10 @@
 			    setTimeout(function() {
 			      console.log(returnData);
 			      dfd.resolve();
+						location.href = "updfile.php";	//処理が終了したら戻る
 			    }, 1000);
 			  });
+				
 			  // fail()は省略
 			  return dfd.promise();
 		  });
