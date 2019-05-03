@@ -39,16 +39,17 @@
 									送信するファイルを指定して下さい。</p>
 								</header>
 								<footer class="major">
-									<ul class="actions special">
+									<ul class="actions stacked">
 										<form action="updfile-result.php" method="post" enctype="multipart/form-data">
 										<div id="file_input">
-											<li><input type="file" id="file" name="file"><label for="file" id="file_label">ファイルを選択</label></li>
+											<li><input type="file" id="file" name="file"><label for="file" id="file_label" class="button primary fit">ファイルを選択</label></li>
 						        </div>
 									  </form>
 										<!-- サムネイル表示領域 -->
 										<li><canvas id="canvas" width="0" height="0"></canvas></li>
+										<!-- <li><canvas id="canvas"></canvas></li> -->
 										<!-- アップロード開始ボタン -->
-										<li><button class="button" id="upload"><font size="3">画像送信</font></button></li>
+										<button class="button fit" id="upload"><font size="3">画像送信</font></button>
 									</ul>
 								</footer>
 							</section>
@@ -150,7 +151,6 @@
 	    if(!file || !blob) {
 	      return;
 	    }
-
 	    var name, fd = new FormData();
 	    fd.append('file', blob); // ファイルを添付する
 
@@ -162,6 +162,7 @@
 	      processData: false,
 	      contentType: false
 	    })
+
 	    .done(function( data, textStatus, jqXHR ) {
 	      // 送信成功
 				console.log("TEST");
@@ -170,10 +171,8 @@
 	      // 送信
 				console.log("hello world!");
 				//ページ遷移
-				//location.href = "sendPicture.php?msg=001.jpg";	//LINEへ画像を送信する
 				location.href = "updfile-result.php";						//ファイル送信のPHPと同じだが、ここでは結果を表示する
 	    });
-
 
 	  });
 

@@ -56,7 +56,7 @@
 						  <a href="updfile.php" class="button primary fit"> 戻る </a>
 					  </ul>
 						<!-- LINE画像送信開始ボタン -->
-						<button class="button" id="sendLine"><font size="3">LINE画像送信</font></button>
+						<button class="button fit" id="sendLine"><font size="3">LINE画像送信</font></button>
 
 						<!--
 						<form action="sendPicture.php?msg=001.jpg" method="post">
@@ -102,7 +102,7 @@
 						location.href = "updfile.php";	//処理が終了したら戻る
 			    }, 1000);
 			  });
-				
+
 			  // fail()は省略
 			  return dfd.promise();
 		  });
