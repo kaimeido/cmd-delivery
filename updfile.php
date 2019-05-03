@@ -167,10 +167,10 @@
 				console.log("TEST");
 	    })
 	    .fail(function( jqXHR, textStatus, errorThrown ) {
-	      // 送信失敗
+	      // 送信
 				console.log("hello world!");
 				//ページ遷移
-				location.href = "sendPicture.php?msg=001.jpg";	//LINEへ画像を送信する
+				//location.href = "sendPicture.php?msg=001.jpg";	//LINEへ画像を送信する
 				location.href = "updfile-result.php";						//ファイル送信のPHPと同じだが、ここでは結果を表示する
 	    });
 

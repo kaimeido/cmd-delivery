@@ -53,12 +53,16 @@
 						<div id="sample"><p><img src="upload/001.jpg"></p></div>
 
 						<ul class="actions special">
-						  <a href="updfile.php" class="button primary"> 戻る </a>
+						  <a href="updfile.php" class="button primary fit"> 戻る </a>
 					  </ul>
+						<!-- LINE画像送信開始ボタン -->
+						<button class="button" id="sendLine"><font size="3">LINE画像送信</font></button>
 
+						<!--
 						<form action="sendPicture.php?msg=001.jpg" method="post">
 						<input type="submit" class="button fit" value="LINE画像送信">
 						</form>
+						-->
 						</section>
 					</div>
 
@@ -76,5 +80,32 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 	</body>
+
+
+		<!-- 以下、javascript -->
+		<script type="text/javascript">
+		$(function() {
+
+		  // アップロード開始ボタンがクリックされたら
+		  $('#sendLine').click(function(){
+				var dfd = $.Deferred();
+		    $.ajax({
+		      url: "sendPicture.php?msg=001.jpg", // 送信先 ここでファイルが送信される
+		      type: 'POST'
+		    })
+
+				.done(function(returnData) {
+			    // 返ってくるのに時間が掛かる処理
+			    setTimeout(function() {
+			      console.log(returnData);
+			      dfd.resolve();
+			    }, 1000);
+			  });
+			  // fail()は省略
+			  return dfd.promise();
+		  });
+
+		});
+		</script>
 
 </html>
