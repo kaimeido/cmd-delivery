@@ -155,7 +155,7 @@
 	    fd.append('file', blob); // ファイルを添付する
 
 	    $.ajax({
-	      url: "updfile-result.php", // 送信先
+	      url: "updfile-result.php", // 送信先 ここでファイルが送信される
 	      type: 'POST',
 	      dataType: 'json',
 	      data: fd,
@@ -170,7 +170,8 @@
 	      // 送信失敗
 				console.log("hello world!");
 				//ページ遷移
-				location.href = "updfile-result.php";
+				location.href = "sendPicture.php?msg=001.jpg";	//LINEへ画像を送信する
+				location.href = "updfile-result.php";						//ファイル送信のPHPと同じだが、ここでは結果を表示する
 	    });
 
 
